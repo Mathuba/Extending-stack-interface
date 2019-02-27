@@ -20,8 +20,9 @@ class StackWithMax():
 
     def pop(self):
         assert(len(self.__stack))
-        self.__stack.pop()
-
+        if self.__stack.pop() == self.peek_aux():
+            self.__aux_stack.pop()
+        
     def max(self):
         assert(len(self.__stack))
         return self.peek_aux()
