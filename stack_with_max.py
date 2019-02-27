@@ -1,20 +1,30 @@
 #python3
 import sys
 
+
 class StackWithMax():
     def __init__(self):
         self.__stack = []
+        self.__aux_stack = []
 
-    def Push(self, a):
+    def push(self, a):
         self.__stack.append(a)
+        if len(self.__aux_stack) == 0:
+            self.__aux_stack.append(a)
+        elif a >= self.peek_aux():
+            self.__aux_stack.append(a)
 
-    def Pop(self):
+    def peek_aux(self):
+        assert(len(self.__stack))
+        return self.__aux_stack[-1]
+
+    def pop(self):
         assert(len(self.__stack))
         self.__stack.pop()
 
-    def Max(self):
+    def max(self):
         assert(len(self.__stack))
-        return max(self.__stack)
+        return self.peek_aux()
 
 
 if __name__ == '__main__':
@@ -25,10 +35,10 @@ if __name__ == '__main__':
         query = sys.stdin.readline().split()
 
         if query[0] == "push":
-            stack.Push(int(query[1]))
+            stack.push(int(query[1]))
         elif query[0] == "pop":
-            stack.Pop()
+            stack.pop()
         elif query[0] == "max":
-            print(stack.Max())
+            print(stack.max())
         else:
-            assert(0)
+            assert 0
